@@ -14,11 +14,23 @@ server.post('/api/users', (req, res) => {
         res.status(201).json(user)
       })
       .catch(() => {
-        re.status(500).json({
+        res.status(500).json({
           errorMessage: 'There was an error while saving the user to the database.'
         })
       })
   }
+})
+
+server.get('/api/users', (req,res) => {
+  db.find()
+    .then(users => {
+      res.status(200).json(users)
+    })
+    .catch(() => {
+      res.status(500).json({
+        errorMessage: 'The users information could not be retrieved.'
+      })
+    })
 })
 
 server.listen(8000, () => {
